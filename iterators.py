@@ -1,21 +1,29 @@
-class ListReverser:
-
-  def __init__(self, lst):
-    self.list = lst
-
-  def __iter__(self):
-    return iter(reversed(self.list))
+# from iterators import *
 
 
-class ListReverser2:
+def squares_then_normal(n):
+  for i in range(n):
+    yield i**2
+  yield from range(n)
 
-  def __init__(self, lst):
-    self.list = lst
+
+class ListReverser(list):
 
   def __iter__(self):
-    lst = self.list
-    for i in range(len(lst) - 1, -1, -1):
-      yield lst[i]
+    return iter(reversed(self))
+
+
+# list(ListReverser(['cat.', 'my', 'is', 'This']))
+
+
+class ListReverser2(list):
+
+  def __iter__(self):
+    for x in reversed(self):
+      yield x
+
+
+# list(ListReverser2(['cat.', 'my', 'is', 'This']))
 
 
 class RangeIter:
@@ -33,3 +41,6 @@ class RangeIter:
       raise StopIteration
     self.current += 1
     return value
+
+
+# list(RangeIter(0, 10))
